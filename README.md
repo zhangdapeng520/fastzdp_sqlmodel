@@ -1,0 +1,2 @@
+# fastzdp_sqlmodel
+基于SQLModel封装的专用于FastAPI处理MySQL数据库业务的框架
