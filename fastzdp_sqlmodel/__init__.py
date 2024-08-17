@@ -8,6 +8,9 @@ from .get import (
 from .update import (
     update, update_id,
 )
+from .delete import (
+    delete, delete_id,
+)
 
 __all__ = [
     "add",
@@ -21,4 +24,6 @@ __all__ = [
     "get",
     "update",
     "update_id",
+    "delete",
+    "delete_id",
 ]
