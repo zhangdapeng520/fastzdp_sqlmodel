@@ -3,7 +3,7 @@ from .engine import get_engine
 from .table import init_table, create_table
 from .get import (
     get_by_dict, get_all, get_by_dict_or,
-    get_by_dict_and, get,
+    get_by_dict_and, get, get_page,
 )
 from .update import (
     update, update_id,
@@ -18,6 +18,7 @@ __all__ = [
     "init_table",
     "create_table",
     "get_all",
+    "get_page",
     "get_by_dict",
     "get_by_dict_or",
     "get_by_dict_and",
