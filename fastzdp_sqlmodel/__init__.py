@@ -5,6 +5,9 @@ from .get import (
     get_by_dict, get_all, get_by_dict_or,
     get_by_dict_and, get,
 )
+from .update import (
+    update, update_id,
+)
 
 __all__ = [
     "add",
@@ -16,4 +19,6 @@ __all__ = [
     "get_by_dict_or",
     "get_by_dict_and",
     "get",
+    "update",
+    "update_id",
 ]
