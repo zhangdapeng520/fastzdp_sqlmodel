@@ -90,3 +90,15 @@ def get_all(engine, model):
     """
     with Session(engine) as session:
         return session.exec(select(model)).all()
+
+
+def get(engine, model, id):
+    """
+    根据ID查询数据
+    :param engine: 连接数据库的引擎对象
+    :param model: 模型类
+    :param id: 要查找的id的值
+    :return: id对应的模型对象，如果不存在返回None
+    """
+    with Session(engine) as session:
+        return session.exec(select(model).where(model.id == id)).first()
