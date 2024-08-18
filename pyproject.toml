@@ -1,7 +1,7 @@
 [tool.poetry]
 name = "fastzdp-sqlmodel"
-version = "0.1.0"
-description = ""
+version = "0.1.1"
+description = "基于SQLModel封装的专用于FastAPI处理MySQL数据库业务的框架"
 authors = ["zhangdapeng520 <1156956636@qq.com>"]
 readme = "README.md"
 

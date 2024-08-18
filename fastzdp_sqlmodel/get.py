@@ -18,6 +18,19 @@ def get_by_dict(engine, model, query_dict: dict):
         return results.all()
 
 
+def get_first(engine, model, query_dict: dict):
+    """
+    获取查询结果中的第一条数据
+    :param engine: 引擎对象
+    :param model: 模型类
+    :param query_dict: 查询字典
+    :return: 存在数据返回模型对象，否则返回None
+    """
+    data = get_by_dict(engine, model, query_dict)
+    if isinstance(data, list) and len(data) > 0:
+        return data[0]
+
+
 def get_by_dict_or(engine, model, query_dict: dict):
     """
     根据查询字典指定的键值对查询数据，键值对之间的关系是or的关系
@@ -90,33 +103,6 @@ def get_all(engine, model):
     """
     with Session(engine) as session:
         return session.exec(select(model)).all()
-
-
-def get_page(
-        engine,
-        model,
-        page: int = 1,
-        size: int = 8,
-):
-    """
-    查询所有数据
-    :param engine: 引擎对象
-    :param model: 模型类
-    :param page: 第几页
-    :param size: 每页数量
-    """
-    with Session(engine) as session:
-        # 查询全部
-        query = select(model)
-        count = len(session.exec(query).all())
-
-        # 分页查询
-        offset = (page - 1) * size
-        query = query.offset(offset).limit(size)
-        data = session.exec(query).all()
-
-        # 返回
-        return {"count": count, "data": data, "page": page, "size": size}
 
 
 def get(engine, model, id):

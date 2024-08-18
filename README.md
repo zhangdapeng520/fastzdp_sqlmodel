@@ -376,12 +376,108 @@ u = fsqlmodel.get(engine, User, 1)
 print(u)
 ```
 
+### 分页查询数据
+
+```python
+from typing import Optional
+from sqlmodel import Field, SQLModel
+import fastzdp_sqlmodel as fsqlmodel
+
+
+class User(SQLModel, table=True):
+    id: Optional[int] = Field(default=None, primary_key=True)
+    name: str
+    age: Optional[int] = None
+
+
+# 创建数据库引擎
+engine = fsqlmodel.get_engine(database="fastzdp_sqlmodel")
+
+# 初始化表格
+fsqlmodel.init_table(engine)
+
+# 创建数据
+fsqlmodel.add(engine, User(name="张三1", age=23))
+fsqlmodel.add(engine, User(name="张三2", age=23))
+fsqlmodel.add(engine, User(name="张三3", age=23))
+
+# 分页查询
+result = fsqlmodel.get_page(engine, User, page=1, size=2)
+print(result)
+```
+
+### 获取第一条数据
+
+```python
+from typing import Optional
+from sqlmodel import Field, SQLModel
+import fastzdp_sqlmodel as fs
+
+
+class User(SQLModel, table=True):
+    id: Optional[int] = Field(default=None, primary_key=True)
+    name: str
+    age: Optional[int] = None
+
+
+# 创建数据库引擎
+engine = fs.get_engine(database="fastzdp_sqlmodel")
+
+# 初始化表格
+fs.init_table(engine)
+
+# 创建数据
+fs.add(engine, User(name="张三1", age=23))
+fs.add(engine, User(name="张三2", age=23))
+fs.add(engine, User(name="张三3", age=23))
+
+# 查询第一条数据
+u = fs.get_first(engine, User, {"name": "张三1"})
+print(u)
+```
+
+### 判断数据是否存在
+
+```python
+from typing import Optional
+from sqlmodel import Field, SQLModel
+import fastzdp_sqlmodel as fs
+
+
+class User(SQLModel, table=True):
+    id: Optional[int] = Field(default=None, primary_key=True)
+    name: str
+    age: Optional[int] = None
+
+
+# 创建数据库引擎
+engine = fs.get_engine(database="fastzdp_sqlmodel")
+
+# 初始化表格
+fs.init_table(engine)
+
+# 创建数据
+fs.add(engine, User(name="张三1", age=23))
+fs.add(engine, User(name="张三2", age=23))
+fs.add(engine, User(name="张三3", age=23))
+
+# 判断是否存在
+print(fs.is_exists(engine, User, {"name": "张三1"}))
+print(fs.is_exists(engine, User, {"name": "张三11"}))
+```
+
 ## 版本历史
 
 ### v0.1.0
 
 - 常见的增删改查功能
 
-## 说明
+### v0.1.1
 
-如果你对Python感兴趣，需要一对一的指导，欢迎私信我，包教会。
+- get_page 分页查询
+- get_first 获取第一条数据
+- is_exists 判断数据是否存在
+
+## 底部广告
+
+如果你需要FastAPI零基础到项目实战的整套录播课程，或者Python的一对一私教课指导，欢迎加我微信 18010070052
