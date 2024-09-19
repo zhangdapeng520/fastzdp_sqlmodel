@@ -12,3 +12,8 @@ def init_table(engine: Engine):
 def create_table(engine: Engine):
     """创建表格"""
     SQLModel.metadata.create_all(engine)  # 创建所有表
+
+
+def clear_table(engine: Engine):
+    """清除表格"""
+    SQLModel.metadata.drop_all(engine)

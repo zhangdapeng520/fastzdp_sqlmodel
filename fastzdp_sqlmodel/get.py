@@ -48,7 +48,7 @@ def get_by_dict_or(engine, model, query_dict: dict):
                         mk = getattr(model, k)
                         conditions = []
                         for kk, vv in v.items():
-                            if kk == "==":
+                            if kk == "==" or kk == "=":
                                 conditions.append(mk == vv)
                             elif kk == ">":
                                 conditions.append(mk > vv)
