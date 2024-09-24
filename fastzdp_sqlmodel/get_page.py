@@ -6,7 +6,8 @@ def get_page(
         model,
         page: int = 1,
         size: int = 8,
-        **query_dict,
+        query_dict=None,
+        in_dict=None,
 ):
     """
     查询所有数据
@@ -15,15 +16,23 @@ def get_page(
     :param page: 第几页
     :param size: 每页数量
     :param query_dict: 查询条件
+    :param in_dict: 查询条件, {id:[1,2,3]}
     """
     with Session(engine) as session:
         # 查询全部
         query = select(model)
 
         # 等值查询条件
-        for k, v in query_dict.items():
-            if hasattr(model,k):
-                query = query.where(getattr(model,k) == v)
+        if isinstance(query_dict, dict):
+            for k, v in query_dict.items():
+                if hasattr(model, k):
+                    query = query.where(getattr(model, k) == v)
+
+        # in查询条件
+        if isinstance(in_dict, dict):
+            for k, v in in_dict.items():
+                if hasattr(model, k):
+                    query = query.where(getattr(model, k).in_(v))
 
         # 统计个数
         count = len(session.exec(query).all())
