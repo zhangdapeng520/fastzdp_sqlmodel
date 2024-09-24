@@ -25,6 +25,9 @@ def get_page(
         if isinstance(query_dict, dict):
             pass
 
+        # 根据ID降序
+        query = query.order_by(model.id.desc())
+
         # 分页查询
         offset = (page - 1) * size
         query = query.offset(offset).limit(size)
