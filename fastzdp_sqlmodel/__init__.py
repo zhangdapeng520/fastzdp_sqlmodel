@@ -17,6 +17,9 @@ from .delete import (
 from .is_bool import (
     is_exists,
 )
+from .get_analysis import (
+    get_sum,
+)
 
 __all__ = [
     "add",
@@ -35,4 +38,5 @@ __all__ = [
     "delete",
     "delete_id",
     "is_exists",
+    "get_sum",  # 求和
 ]
