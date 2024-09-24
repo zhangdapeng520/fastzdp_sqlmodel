@@ -6,7 +6,7 @@ def get_page(
         model,
         page: int = 1,
         size: int = 8,
-        query_dict:dict = None,
+        **query_dict,
 ):
     """
     查询所有数据
@@ -14,16 +14,19 @@ def get_page(
     :param model: 模型类
     :param page: 第几页
     :param size: 每页数量
-    :param query_dict: 查询条件，比如 {name:{like:"%张三%"}}
+    :param query_dict: 查询条件
     """
     with Session(engine) as session:
         # 查询全部
         query = select(model)
-        count = len(session.exec(query).all())
 
-        # 查询条件
-        if isinstance(query_dict, dict):
-            pass
+        # 等值查询条件
+        for k, v in query_dict.items():
+            if hasattr(model,k):
+                query = query.where(getattr(model,k) == v)
+
+        # 统计个数
+        count = len(session.exec(query).all())
 
         # 根据ID降序
         query = query.order_by(model.id.desc())

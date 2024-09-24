@@ -15,7 +15,9 @@ fasm.init_table(engine)
 fasm.add(engine, User(name="张三", age=22))
 fasm.add(engine, User(name="李四", age=33))
 fasm.add(engine, User(name="王五", age=33))
+fasm.add(engine, User(name="a", age=22))
+fasm.add(engine, User(name="a", age=33))
+fasm.add(engine, User(name="a", age=33))
 
-
-users = fasm. get_page(engine,User,page=1,size=2)
+users = fasm.get_page(engine, User, page=1, size=2, name="a")
 print(users)

@@ -482,6 +482,10 @@ print(fs.is_exists(engine, User, {"name": "张三11"}))
 
 - get_page 根据ID降序
 
+### v0.1.3
+
+- get_page 支持等值查询
+
 ## 底部广告
 
 如果你需要FastAPI零基础到项目实战的整套录播课程，或者Python的一对一私教课指导，欢迎加我微信 18010070052
